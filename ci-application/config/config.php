@@ -56,6 +56,18 @@ $config['modules_locations'] = array(APPPATH . $modules_location .'/' => '../'.$
 
 /*
 |--------------------------------------------------------------------------
+| Config Table Prefix
+|--------------------------------------------------------------------------
+|
+| Konfigurasi prefix tabel
+| Setingan diload dari ubd-config
+| ubd-cms, belum ada slogan :)
+|
+*/
+$config['table_prefix'] = 'ubd_';
+
+/*
+|--------------------------------------------------------------------------
 | URI PROTOCOL
 |--------------------------------------------------------------------------
 |

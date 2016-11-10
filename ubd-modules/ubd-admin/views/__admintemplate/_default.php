@@ -39,7 +39,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini login-page">
 
-  <?= $this->output->get_section('header'); ?>
+   <?= $this->output->get_section('header'); ?>
 
   <?= $this->output->get_section('sidebar'); ?>
 
@@ -50,3 +50,4 @@
   <?= $this->output->get_section('js'); ?>
 
 </body>
+</html>

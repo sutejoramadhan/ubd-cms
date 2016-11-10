@@ -8,6 +8,7 @@ class Auth extends MY_Controller {
 		parent::__construct();
 		$this->_init();
 
+		$this->load->model('auth/model_default');
 		$this->load->helper('captcha');
 		$this->load->library('form_validation');
 	}
@@ -21,7 +22,7 @@ class Auth extends MY_Controller {
 	{
 		if ($this->session->userdata('logged_in')) 
 		{
-			redirect(base_url('dashboard'));
+			redirect(base_url('ubd-admin/dashboard'));
 		} 
 		else 
 		{
@@ -74,7 +75,35 @@ class Auth extends MY_Controller {
 		} 
 		else 
 		{
-			# code...
+			$authResponse = $this->model_default->get_login_info($this->input->post('username'), $this->input->post('password'));
+
+			if ($authResponse['row'] < 1) 
+			{
+				$_SESSION['ResponColor']  = 'danger';
+				$_SESSION['ResponTitle']  = 'Gagal login!';
+				$_SESSION['ResponMesage'] = 'Username dan Password salah, atau Status anda Tidak Aktif';
+				$this->session->mark_as_flash(array('ResponMesage', 'ResponColor', 'ResponTitle'));
+				redirect(base_url('ubd-admin'));
+			} 
+			else 
+			{
+				$sessionData = array(
+					'logged_in' => TRUE,
+					'user_id' => $authResponse['data']->user_id,
+					'username' => $authResponse['data']->username,
+					'nama_legkap' => $authResponse['data']->nama_legkap,
+					'email' => $authResponse['data']->email,
+					'user_picture' => $authResponse['data']->user_picture,
+					'group' => $authResponse['data']->group,
+					'user_status' => $authResponse['data']->user_status,
+					'group_level' => $authResponse['data']->group_level,
+					'group_name' => $authResponse['data']->group_name,
+					'role' => $authResponse['data']->role,
+				);
+
+				$this->session->set_userdata($sessionData);
+				redirect(base_url('ubd-admin/dashboard'));
+			}
 		}
 	}
 
