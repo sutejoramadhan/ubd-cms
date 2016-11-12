@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'blog.binadarma.ac.id',
-	'username' => 'ramadhansutejo',
-	'password' => 'user@ramadhan123',
+	'hostname' => 'localhost',
+	'username' => 'development',
+	'password' => '',
 	'database' => 'ubd-cms',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

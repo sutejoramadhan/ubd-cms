@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" href="<?= $this->ubd_adminassetspath->assets('img/favicon.png') ?>" sizes="16x16" type="image/png">
   <title><?= $this->ubd_configlib->UBDCMS_SiteOptions('sitename') ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -13,7 +14,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?= $this->ubd_adminassetspath->assets('css/AdminLTE.min.css') ?>">
+  <link rel="stylesheet" href="<?= $this->ubd_adminassetspath->assets('css/AdminLTE.css') ?>">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?= $this->ubd_adminassetspath->assets('css/skins/_all-skins.min.css') ?>">

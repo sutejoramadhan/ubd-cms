@@ -91,7 +91,7 @@ class Auth extends MY_Controller {
 					'logged_in' => TRUE,
 					'user_id' => $authResponse['data']->user_id,
 					'username' => $authResponse['data']->username,
-					'nama_legkap' => $authResponse['data']->nama_legkap,
+					'nama_lengkap' => $authResponse['data']->nama_lengkap,
 					'email' => $authResponse['data']->email,
 					'user_picture' => $authResponse['data']->user_picture,
 					'group' => $authResponse['data']->group,
@@ -99,6 +99,7 @@ class Auth extends MY_Controller {
 					'group_level' => $authResponse['data']->group_level,
 					'group_name' => $authResponse['data']->group_name,
 					'role' => $authResponse['data']->role,
+					'registrasi_date' => $authResponse['data']->registrasi_date,
 				);
 
 				$this->session->set_userdata($sessionData);
