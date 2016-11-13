@@ -25,8 +25,8 @@ class Model_default extends CI_Model {
 			B.role,
 			A.registrasi_date
 		');
-		$this->db->from($this->config->item('table_prefix') . 'users AS A');
-		$this->db->join($this->config->item('table_prefix') . 'user_groups AS B', 'A.`group` = B.user_groupd_id', 'inner');
+		$this->db->from('users AS A');
+		$this->db->join('user_groups AS B', 'A.`group` = B.user_groupd_id', 'inner');
 		$this->db->where('A.username', $username);
 		$this->db->where('A.password', md5($password));
 		$query = $this->db->get();
