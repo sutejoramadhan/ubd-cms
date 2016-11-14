@@ -1,3 +1,15 @@
+<?php
+if (!$this->session->userdata('logged_in')) 
+{
+	$_SESSION['ResponMesage'] = 'Anda belum login atau waktu sesi anda habis';
+	$_SESSION['ResponColor']  = 'warning';
+	$_SESSION['ResponTitle']  = 'Access Forbiden!';
+	$this->session->mark_as_flash(array('ResponMesage', 'ResponColor', 'ResponTitle'));
+
+	redirect(base_url('ubd-admin'));
+}
+?>
+
 <div class="wrapper">
 
   <header class="main-header">
@@ -111,13 +123,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?= base_url('ubd-content/uploads/user2-160x160.jpg') ?>" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <img src="<?= base_url('ubd-content/uploads/'.$this->session->userdata('user_picture')) ?>" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?= $this->session->userdata('nama_lengkap'); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?= base_url('ubd-content/uploads/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
+                <img src="<?= base_url('ubd-content/uploads/'.$this->session->userdata('user_picture')) ?>" class="img-circle" alt="User Image">
 
                 <p>
                   <?= $this->session->userdata('nama_lengkap'); ?> - <?= $this->session->userdata('group_name'); ?>
@@ -130,7 +142,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profil</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Log out</a>
+                  <a href="<?= base_url('ubd-admin/auth/logout') ?>" class="btn btn-default btn-flat">Log out</a>
                 </div>
               </li>
             </ul>
