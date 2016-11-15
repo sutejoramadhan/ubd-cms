@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database', 'session', 'ubd_configlib', 'ubd_adminassetspath');
+$autoload['libraries'] = array('database', 'session', 'ubd_configlib', 'ubd_adminassetspath', 'ubd_admin_dynamic_menu');
 
 /*
 | -------------------------------------------------------------------

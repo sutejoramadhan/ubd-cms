@@ -26,6 +26,13 @@ class Dashboard extends MY_Controller {
 		$this->load->view('dashboard/index', $data, FALSE);
 	}
 
+	public function test_dynamic_menu()
+	{
+		$this->output->unset_template('_default');
+
+		print_r($this->ubd_admin_dynamic_menu->create_menu());
+	}
+
 }
 
 /* End of file Dashboard.php */
