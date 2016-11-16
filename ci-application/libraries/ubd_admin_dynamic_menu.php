@@ -3,7 +3,7 @@
  * @Author: sutejoramadhan
  * @Date:   2016-11-15 14:05:59
  * @Last Modified by:   sutejoramadhan
- * @Last Modified time: 2016-11-15 17:27:43
+ * @Last Modified time: 2016-11-16 16:29:49
  *
  * Library ini merupakan library anakan/terusan serta pengembangan dari 
  * library dynamic menu saya yg lain(ist_lib_dynamic_menu). 
@@ -74,19 +74,18 @@ class Ubd_admin_dynamic_menu
 		{
 			$arMenuSeperatorID = array();
 			$arMenuSeperatorHtml = array();
-			
+		
 			foreach ($menuHeaders as $key => $menuHeader) 
 			{
 				$menuSeperatorHtml = $this->li_tag_open1 . $this->header_li_class . $this->li_tag_open2 . strtoupper($menuHeader->menu_seperator_title) . $this->li_tag_close;
+
+				$menu_seperator[$menuHeader->menu_seperator_id] = $menuSeperatorHtml;
 
 				array_push($arMenuSeperatorHtml, $menuSeperatorHtml);
 				array_push($arMenuSeperatorID, $menuHeader->menu_seperator_id);
 			}
 
-			$returnData = array(
-				'menu_seperator' => $arMenuSeperatorID,
-				'html_render' => $arMenuSeperatorHtml,
-			);		
+			$returnData = $menu_seperator;	
 		} 
 		else 
 		{
@@ -104,21 +103,41 @@ class Ubd_admin_dynamic_menu
 	 */
 	public function generateMenu()
 	{
-		$menuSeperators = $this->generateMenuSeperator();
-
-		$arMenuParentID = array();
-		$arMenuHtml = array();
-
-		print_r($menuSeperators);
-
-		foreach ($menuSeperators['menu_seperator'] as $key) 
+		foreach ($this->generateMenuSeperator() as $key => $menuSeperatorRender)
 		{
-			//echo $menuSeperators['menu_seperator'][$key];
+			$menu_parents = $this->getMenu($key);
+
+			if (is_array($menu_parents) AND !empty($menu_parents))
+			{
+				$arMenuParent = array();
+				$arMenuParentHtml = array();
+
+				foreach ($menu_parents as $key => $menu_parent)
+				{
+					$menuParentHtml = $this->generateMenuSeperator()[1]; 
+					$menuParentHtml .= $this->li_tag_open1 . $this->li_tag_open2;
+					$menuParentHtml .= "\n\t\t" . $this->link_atr_open1 . base_url('' . $menu_parent->url) . $this->link_atr_open2;
+					$menuParentHtml .= $this->icon_atr1 . $menu_parent->icon . $this->icon_atr2 ." " . $this->caption_atr1 . $menu_parent->title . $this->caption_atr2 . $this->link_atr_close;
+					$menuParentHtml .= "\n" . $this->li_tag_close;
+
+					array_push($arMenuParent, $menu_parent->menu_id);
+					array_push($arMenuParentHtml, $menuParentHtml);
+
+					//echo $menuParentHtml;
+				}
+
+				$returnData = array(
+					'menu_parent' => $arMenuParent, 
+					'html_render' => $arMenuParentHtml, 
+				);
+			}
+			else 
+			{
+				//echo "Nothing!";
+			}
 		}
 
-		//echo $menuSeperators['menu_seperator'][0];
-
-		//return $menuSeperators['menu_seperator'];
+		return $returnData;
 	}
 	
 
